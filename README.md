@@ -9,8 +9,12 @@
 
 ## Dataset
 
+* The paper uses the `Snopes` dataset and the `Politifact` dataset. Both of which can be found here: https://github.com/nguyenvo09/EMNLP2020
 * Data instances take on the form `D = {(c_1, e_1, y_1), ..., (c_n, e_n, y_n)}` where:
 	- `c_j` is the claim in text; 
 	- `e_j` is the evidence to support or refute the claim (evidence is collected from the top 10 google search results when using the claim as a query);
 	- `y_j` is the target variable to be predicted 
+* To fit the above data scheme the following features are excluded: 
+	- For PolitiFact we exclude [full flop, half flip, no flip]
+	- For Snopes we exclude [unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution].
 * Datasets have a 70-10-20 split for training-validation-testing sets
