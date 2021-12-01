@@ -13,3 +13,4 @@
 	- `c_j` is the claim in text; 
 	- `e_j` is the evidence to support or refute the claim (evidence is collected from the top 10 google search results when using the claim as a query);
 	- `y_j` is the target variable to be predicted 
+* Datasets have a 70-10-20 split for training-validation-testing sets
