@@ -15,6 +15,6 @@
 	- `e_j` is the evidence to support or refute the claim (evidence is collected from the top 10 google search results when using the claim as a query);
 	- `y_j` is the target variable to be predicted 
 * To fit the above data scheme the following features are excluded: 
-	- For PolitiFact we exclude [full flop, half flip, no flip]
-	- For Snopes we exclude [unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution].
+	- For PolitiFact we exclude `[full flop, half flip, no flip]`
+	- For Snopes we exclude `[unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution]`
 * Datasets have a 70-10-20 split for training-validation-testing sets
