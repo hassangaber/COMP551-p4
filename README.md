@@ -3,3 +3,4 @@
 
 * Paper repository: https://github.com/casperhansen/fake-news-reasoning
 
+* Main claim: Current models classifying fake news based on both claims and evidence proves inferior to models based only on evidence. This highlights the issue that models are not learning to reason but rather exploit signals in evidence (bias)
