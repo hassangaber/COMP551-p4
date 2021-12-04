@@ -18,3 +18,27 @@
 	- For PolitiFact we exclude `[full flop, half flip, no flip]`
 	- For Snopes we exclude `[unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution]`
 * Datasets have a 70-10-20 split for training-validation-testing sets
+
+## Reproducing Results
+
+### Re-running the Experiment
+* Download the dataset and place it in the same file as `code-acl`
+```
+user@:~/fake-news-reasoning$ sudo wget https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=1
+```
+
+* Run `main.py`
+```
+user@:~/fake-news-reasoning/code-acl/bias$ sudo pip3 install -r requirement.txt
+user@:~/fake-news-reasoning/code-acl/bias$ cp model_selection.py /usr/local/lib/python3.8/site-packages/hypopt
+user@:~/fake-news-reasoning/code-acl/bias$ sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes   
+```
+
+### Interpreting Results
+* After running each configuration between `[lstm, bert, rf]` and `[snes, pomt]`
+```
+user@:~/fake-news-reasoning/code-acl/bias$ cd results
+user@:~/fake-news-reasoning/code-acl/bias/results$ ls && cd ..
+user@:~/fake-news-reasoning/code-acl/bias$ sudo python3 analyze.py
+```
+ 
