@@ -9,7 +9,7 @@
 
 ## Dataset
 
-* The paper uses the `Snopes` dataset and the `Politifact` dataset. Both of which can be found here: https://github.com/nguyenvo09/EMNLP2020
+* The paper uses the `Snopes` dataset and the `Politifact` dataset. Both of which can be found here: https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=0
 * Data instances take on the form `D = {(c_1, e_1, y_1), ..., (c_n, e_n, y_n)}` where:
 	- `c_j` is the claim in text; 
 	- `e_j` is the evidence to support or refute the claim (evidence is collected from the top 10 google search results when using the claim as a query);
