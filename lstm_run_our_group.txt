@@ -1,0 +1,90 @@
+hassan@instance-2:~$ cd src/fake-news-reasoning/code-acl/bias/
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ sudo python3 main.py 
+[Dec 04, 06:51:16] Namespace(batchsize=2, dataset='pomt', eval_per_epoch=1, filter_websites=0, inputtype='CLAIM_AND_EVIDENCE', lr=0.0001, lstm_dropout=0.1, lstm_hidden_dim=128, lstm_layers=1, model='bert')
+len 13581 , pants on fire! (10.6\%), false (19.2\%), mostly false (17.0\%), half-true (19.8\%), mostly true (18.8\%), true (14.8\%)
+len 5069 , pants on fire! (0.0\%), false (64.3\%), mostly false (7.5\%), half-true (12.3\%), mostly true (2.8\%), true (13.0\%)
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing MyBertModel: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+- This IS expected if you are initializing MyBertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing MyBertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of MyBertModel were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['predictor.weight', 'predictor.bias', 'attn_score.weight', 'attn_score.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+model parameters 109492231
+[Dec 04, 07:31:13] TRAIN loss 1.82164242573501 1
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[Dec 04, 07:33:01] VALIDATION F1micro, F1macro, loss: 0.19145802650957292 0.05356407086938608 1358
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[Dec 04, 07:36:38] TEST F1micro, F1macro, loss: 0.19175561280824438 0.05363393040971793 2717
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+[Dec 04, 07:37:57] OTHER-TEST F1micro, F1macro, loss: 0.6429980276134122 0.1565426170468187 1014
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [1:26:16<00:00, 517.69s/it]
+[Dec 04, 09:04:14] [0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536]
+[Dec 04, 09:04:14] [0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536, 0.0536]
+[Dec 04, 09:04:14] [0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565]
+[Dec 04, 09:04:14] [0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565, 0.1565]
+[Dec 04, 09:04:14] PATIENCE 0 / 10
+[Dec 04, 09:43:09] TRAIN loss 1.8101520587990165 2
+[Dec 04, 09:44:56] VALIDATION F1micro, F1macro, loss: 0.19145802650957292 0.05356407086938608 1358
+[Dec 04, 09:44:56] PATIENCE 1 / 10
+[Dec 04, 10:23:53] TRAIN loss 1.8019725038908467 3
+[Dec 04, 10:25:40] VALIDATION F1micro, F1macro, loss: 0.1877761413843888 0.05269683818970861 1358
+[Dec 04, 10:25:40] PATIENCE 2 / 10
+[Dec 04, 11:04:40] TRAIN loss 1.8073384925337457 4
+[Dec 04, 11:06:27] VALIDATION F1micro, F1macro, loss: 0.19734904270986744 0.05494054940549405 1358
+[Dec 04, 11:10:02] TEST F1micro, F1macro, loss: 0.19764446080235554 0.05500921942224954 2717
+[Dec 04, 11:11:20] OTHER-TEST F1micro, F1macro, loss: 0.1232741617357002 0.043898156277436345 1014
+100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 10/10 [1:25:26<00:00, 512.64s/it]
+[Dec 04, 12:36:46] [0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055]
+[Dec 04, 12:36:46] [0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055, 0.055]
+[Dec 04, 12:36:46] [0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439]
+[Dec 04, 12:36:46] [0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439, 0.0439]
+[Dec 04, 12:36:46] PATIENCE 0 / 10
+[Dec 04, 13:15:45] TRAIN loss 1.8012476154259573 5
+[Dec 04, 13:17:31] VALIDATION F1micro, F1macro, loss: 0.16936671575846834 0.048278757346767426 1358
+[Dec 04, 13:17:31] PATIENCE 1 / 10
+[Dec 04, 13:56:26] TRAIN loss 1.7974433880115142 6
+[Dec 04, 13:58:12] VALIDATION F1micro, F1macro, loss: 0.19145802650957292 0.05356407086938608 1358
+[Dec 04, 13:58:12] PATIENCE 2 / 10
+[Dec 04, 14:37:11] TRAIN loss 1.7931716883280342 7
+[Dec 04, 14:38:56] VALIDATION F1micro, F1macro, loss: 0.19734904270986744 0.05494054940549405 1358
+[Dec 04, 14:38:56] PATIENCE 3 / 10
+[Dec 04, 15:17:53] TRAIN loss 1.7912536109594854 8
+[Dec 04, 15:19:38] VALIDATION F1micro, F1macro, loss: 0.1877761413843888 0.05269683818970861 1358
+[Dec 04, 15:19:38] PATIENCE 4 / 10
+[Dec 04, 15:58:35] TRAIN loss 1.7911685306901006 9
+[Dec 04, 16:00:20] VALIDATION F1micro, F1macro, loss: 0.1877761413843888 0.05269683818970861 1358
+[Dec 04, 16:00:20] PATIENCE 5 / 10
+[Dec 04, 16:39:19] TRAIN loss 1.7912359861431688 10
+[Dec 04, 16:41:04] VALIDATION F1micro, F1macro, loss: 0.19734904270986744 0.05494054940549405 1358
+[Dec 04, 16:41:04] PATIENCE 6 / 10
+
+
+[Dec 04, 17:20:02] TRAIN loss 1.790009047040532 11
+[Dec 04, 17:21:47] VALIDATION F1micro, F1macro, loss: 0.19734904270986744 0.05494054940549405 1358
+[Dec 04, 17:21:47] PATIENCE 7 / 10
+[Dec 04, 18:00:44] TRAIN loss 1.790500801637402 12
+[Dec 04, 18:02:29] VALIDATION F1micro, F1macro, loss: 0.19734904270986744 0.05494054940549405 1358
+[Dec 04, 18:02:29] PATIENCE 8 / 10
+
+
+
+[Dec 04, 18:41:30] TRAIN loss 1.7893426787243776 13
+[Dec 04, 18:43:15] VALIDATION F1micro, F1macro, loss: 0.1877761413843888 0.05269683818970861 1358
+[Dec 04, 18:43:15] PATIENCE 9 / 10
+[Dec 04, 19:22:16] TRAIN loss 1.789819228756987 14
+[Dec 04, 19:24:01] VALIDATION F1micro, F1macro, loss: 0.19145802650957292 0.05356407086938608 1358
+[Dec 04, 19:24:01] PATIENCE 10 / 10
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
+hassan@instance-2:~/src/fake-news-reasoning/code-acl/bias$ 
