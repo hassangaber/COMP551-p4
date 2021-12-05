@@ -19,26 +19,34 @@
 	- For Snopes we exclude `[unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution]`
 * Datasets have a 70-10-20 split for training-validation-testing sets
 
-## Results (F1 Macro Scores)
+## Results (F1 Macro Scores on Test Set)
 
 | Model | Dataset | Input Type | F1 Macro Score |
 |-------|---------|------------|----------------|
-| RF    | Snopes  | Claim & Ev.|                |
+| RF    | Snopes  | Claim & Ev.|      0.281     |
 |-------|---------|------------|----------------|
-|	|	  |	       |		|
+| RF	| Snopes  | Evidence   |		|
 |-------|---------|------------|----------------| 		
-|       |	  |	       |	        |	
+| RF    | Snopes  | Claim      |	        |	
 |-------|---------|------------|----------------|
-|       |         |            |                |
+| RF    | POTM    | Claim & Ev.|                |
 |-------|---------|------------|----------------|
-|	|	  |	       |	        |	
+| RF	| POTM	  | Evidence   |	        |	
 |-------|---------|------------|----------------|
-|       |         |            |                |
+| RF    | POTM    | Claim      |                |
 |-------|---------|------------|----------------|
-|       |         |            |                |
+| BERT  |         |            |                |
 |-------|---------|------------|----------------|
-
-
+| BERT	|	  |	       |                |		
+|-------|---------|------------|----------------|
+| BERT	|	  |	       |                | 
+|-------|---------|------------|----------------|
+| LSTM	|	  |	       |                |
+|-------|---------|------------|----------------|
+| LSTM	|	  |            |                |
+|-------|---------|------------|----------------|
+| LSTM	|         |	       |	        |
+|-------|---------|------------|----------------|
 ## Reproducing Results
 
 ### Re-running the Experiment
