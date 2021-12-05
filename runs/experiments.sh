@@ -1,5 +1,7 @@
  #!/bin/bash
 
+cd ~/fake-news-reasoning/code-acl/bias
+
 sudo python3 main.py --model bow --dataset pomt --inputtype EVIDENCE_ONLY
 sudo python3 main.py --model bow --dataset pomt --inputtype CLAIM_ONLY
 sudo python3 main.py --model bow --dataset pomt --inputtype CLAIM_AND_EVIDENCE
