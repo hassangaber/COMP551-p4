@@ -46,26 +46,28 @@
 * `setup.sh` will also do the following
 * Clone the paper repository 
 ```
-~$ git clone https://github.com/casperhansen/fake-news-reasoning
+git clone https://github.com/casperhansen/fake-news-reasoning
 ```
 
 * Download the dataset and place it in the same file as `code-acl`
 ```
-~/fake-news-reasoning$ sudo wget https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=1
+cd fake-news-reasoning
+sudo wget https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=1
 ```
 
 * Run `main.py`
 ```
-~/fake-news-reasoning/code-acl/bias$ sudo pip3 install -r requirement.txt
-~/fake-news-reasoning/code-acl/bias$ cp model_selection.py /usr/local/lib/python3.8/site-packages/hypopt
-~/fake-news-reasoning/code-acl/bias$ sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes   
+cd fake-news-reasoning/code-acl/bias
+sudo pip3 install -r requirement.txt
+cp model_selection.py /usr/local/lib/python3.8/site-packages/hypopt
+sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes   
 ```
 
 ### Interpreting Results
 * After running each configuration between `[lstm, bert, rf]` and `[snes, pomt]`, the following produces graphs in `results/`
 ```
-~/fake-news-reasoning/code-acl/bias$ cd results
-~/fake-news-reasoning/code-acl/bias/results$ ls && cd ..
-~/fake-news-reasoning/code-acl/bias$ sudo python3 analyze.py
+cd results
+ls && cd ..
+sudo python3 analyze.py
 ```
 
