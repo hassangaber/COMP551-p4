@@ -19,6 +19,26 @@
 	- For Snopes we exclude `[unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution]`
 * Datasets have a 70-10-20 split for training-validation-testing sets
 
+## Results (F1 Macro Scores)
+
+| Model | Dataset | Input Type | F1 Macro Score |
+|-------|---------|------------|----------------|
+| RF    | Snopes  | Claim & Ev.|                |
+|-------|---------|------------|----------------|
+|	|	  |	       |		|
+|-------|---------|------------|----------------| 		
+|       |	  |	       |	        |	
+|-------|---------|------------|----------------|
+|       |         |            |                |
+|-------|---------|------------|----------------|
+|	|	  |	       |	        |	
+|-------|---------|------------|----------------|
+|       |         |            |                |
+|-------|---------|------------|----------------|
+|       |         |            |                |
+|-------|---------|------------|----------------|
+
+
 ## Reproducing Results
 
 ### Re-running the Experiment
