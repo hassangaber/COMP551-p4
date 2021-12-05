@@ -2,7 +2,6 @@
 
 ## Introduction
 * Reproducibility in ML project based on an Automatic Fake News Detection paper exploring if models are learning to reason: https://arxiv.org/pdf/2105.07698v1.pdf
-
 * Paper repository: https://github.com/casperhansen/fake-news-reasoning
 
 * Main claim: Current models classifying fake news based on both claims and evidence proves inferior to models based only on evidence. This highlights the issue that models are not learning to reason but rather exploit signals in evidence (bias)
@@ -24,29 +23,18 @@
 | Model | Dataset | Input Type | F1 Macro Score |
 |-------|---------|------------|----------------|
 | RF    | Snopes  | Claim & Ev.|      0.281     |
-|-------|---------|------------|----------------|
-| RF	| Snopes  | Evidence   |		|
-|-------|---------|------------|----------------| 		
-| RF    | Snopes  | Claim      |	        |	
-|-------|---------|------------|----------------|
+| RF	| Snopes  | Evidence   |      0.306     | 		
+| RF    | Snopes  | Claim      |	        |
 | RF    | POTM    | Claim & Ev.|                |
-|-------|---------|------------|----------------|
 | RF	| POTM	  | Evidence   |	        |	
-|-------|---------|------------|----------------|
 | RF    | POTM    | Claim      |                |
-|-------|---------|------------|----------------|
 | BERT  |         |            |                |
-|-------|---------|------------|----------------|
-| BERT	|	  |	       |                |		
-|-------|---------|------------|----------------|
+| BERT	|	  |	       |                |
 | BERT	|	  |	       |                | 
-|-------|---------|------------|----------------|
 | LSTM	|	  |	       |                |
-|-------|---------|------------|----------------|
 | LSTM	|	  |            |                |
-|-------|---------|------------|----------------|
 | LSTM	|         |	       |	        |
-|-------|---------|------------|----------------|
+
 ## Reproducing Results
 
 ### Re-running the Experiment
