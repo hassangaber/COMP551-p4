@@ -31,7 +31,7 @@
 | RF	| Snopes  | Evidence   |      0.299     | 		
 | RF    | Snopes  | Claim      |	        |
 | RF    | POTM    | Claim & Ev.|      0.306     |
-| RF	| POTM	  | Evidence   |	        |	
+| RF	| POTM	  | Evidence   |      0.297     |	
 | RF    | POTM    | Claim      |                |
 | BERT  |         |            |                |
 | BERT	|	  |	       |                |
@@ -40,7 +40,7 @@
 | LSTM	|	  |            |                |
 | LSTM	|         |	       |	        |
 
-## Reproducing Results
+## Reproducing Results Based on Project Paper
 
 ### Re-running the Experiment
 * `setup.sh` will also do the following
