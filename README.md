@@ -1,6 +1,6 @@
 # COMP551-p4
 
-- `src` contains modified files from the paper repository
+- `src` contains modified files from the paper repository and a script to automatically set up the enviroment
 - `runs` contains a script to run our experiments and output files of runs
 - `auto_fake_news_paper.pdf` is the paper to be reproduced
 
