@@ -1,5 +1,9 @@
 # COMP551-p4
 
+- `src` contains modified files from the paper repository
+- `runs` contains a script to run our experiments and output files of runs
+- `auto_fake_news_paper.pdf` is the paper to be reproduced
+
 ## Introduction
 * Reproducibility in ML project based on an Automatic Fake News Detection paper exploring if models are learning to reason: https://arxiv.org/pdf/2105.07698v1.pdf
 * Paper repository: https://github.com/casperhansen/fake-news-reasoning
