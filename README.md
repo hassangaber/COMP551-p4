@@ -29,10 +29,10 @@
 |-------|---------|------------|----------------|
 | RF    | Snopes  | Claim & Ev.|      0.281     |
 | RF	| Snopes  | Evidence   |      0.299     | 		
-| RF    | Snopes  | Claim      |	        |
+| RF    | Snopes  | Claim      |      0.225     |
 | RF    | POTM    | Claim & Ev.|      0.306     |
 | RF	| POTM	  | Evidence   |      0.297     |	
-| RF    | POTM    | Claim      |                |
+| RF    | POTM    | Claim      |      0.253     |
 | BERT  |         |            |                |
 | BERT	|	  |	       |                |
 | BERT	|	  |	       |                | 
