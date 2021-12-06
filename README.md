@@ -33,12 +33,12 @@
 | RF    | POTM    | Claim & Ev.|      0.306     |
 | RF	| POTM	  | Evidence   |      0.297     |	
 | RF    | POTM    | Claim      |      0.253     |
-| BERT  |         |            |                |
-| BERT	|	  |	       |                |
-| BERT	|	  |	       |                | 
-| LSTM	|	  |	       |                |
-| LSTM	|	  |            |                |
-| LSTM	|         |	       |	        |
+| BERT  | Snopes  | Claim & Ev.|                |
+| BERT	| Snopes  |	Evidence   |                |
+| LSTM	| POTM	  |	Claim & Ev.|                |
+| LSTM	| POTM	  | Evidence   |                |
+| LSTM	| Snopes  |	Claim & Ev.|	            |
+| LSTM	| Snopes  |	Evidence   |	            |
 
 ## Reproducing Results Based on Project Paper
 
