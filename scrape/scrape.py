@@ -65,3 +65,21 @@ cols = cols[1:] + [cols[0]]
 finalDf = finalDf[cols]
 
 finalDf.to_csv("../data/dataset.csv", index=False)
+
+"""Merging Evidence"""
+
+dataDf = finalDf
+
+# Concatenate evidence columns
+dataDf['Evidence'] = dataDf[dataDf.columns[1:11]].apply(
+    lambda x: '. '.join(x.dropna().astype(str)),
+    axis=1
+)
+
+# Drop individual evidence columns
+dataDf.drop([f"e{i+1}" for i in range(10)], axis=1, inplace=True)
+
+# Swap dataframe column order
+dataDf = dataDf[['Text', 'Evidence', 'Labels']]
+
+dataDf.to_csv("../data/dataset.csv", index=False)
