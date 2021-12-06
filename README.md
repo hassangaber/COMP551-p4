@@ -6,6 +6,8 @@
 
 * Main claim: Current models classifying fake news based on both claims and evidence proves inferior to models based only on evidence. This highlights the issue that models are not learning to reason but rather exploit signals in evidence (bias)
 
+* Goal of this project is to obtain results from the paper on our own and apply models to other language classification datasets with identical dataset formats
+
 ## Datasets
 
 * The paper uses the `Snopes` dataset and the `Politifact` dataset. Both of which can be found here: https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=0
@@ -18,7 +20,9 @@
 	- For Snopes we exclude `[unproven, miscaptioned, legend, outdated, misattributed, scam, correct attribution]`
 * Datasets have a 70-10-20 split for training-validation-testing sets
 
-## Results (F1 Macro Scores on Test Set)
+## Experiment I: Reproducing Results Based on Project Paper
+
+### Results (F1 Macro Scores on Test Set)
 
 * The following table shows the results obtained from our independent run based on the paper repository and conducted experiments
 * The paper claims that models do not learn better from claims and evidence as they do with evidence only, therefore, we focus on the claims & evidence and evidence only F1 scores
@@ -39,8 +43,6 @@
 | LSTM	| POTM	  | Evidence   |      0.263     |
 | LSTM	| Snopes  |	Claim & Ev.|	  0.259     |
 | LSTM	| Snopes  |	Evidence   |	  0.266     |
-
-## Reproducing Results Based on Project Paper
 
 ### Re-running the Experiment
 * `setup.sh` will also do the following
@@ -71,3 +73,4 @@ ls && cd ..
 sudo python3 analyze.py
 ```
 
+## Experiment II: Applying LSTM & Random Forrest models to other datasets
