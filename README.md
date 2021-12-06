@@ -22,12 +22,31 @@
 
 ## Experiment I: Reproducing Results Based on Project Paper
 
+### Re-running the Experiment
+* `setup.sh` will also do the following
+* Clone the paper repository 
+```
+git clone https://github.com/casperhansen/fake-news-reasoning
+```
+* Download the dataset and place it in the same file as `code-acl`
+```
+cd fake-news-reasoning
+sudo wget https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=1
+```
+* Run `main.py`
+```
+cd fake-news-reasoning/code-acl/bias
+sudo pip3 install -r requirement.txt
+cp model_selection.py /usr/local/lib/python3.8/site-packages/hypopt
+sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes   
+```
+
 ### Results (F1 Macro Scores on Test Set)
 
-* The following table shows the results obtained from our independent run based on the paper repository and conducted experiments
+* The following table shows the results obtained from our independent run based on the paper repository
 * The paper claims that models do not learn better from claims and evidence as they do with evidence only, therefore, we focus on the claims & evidence and evidence only F1 scores
 * There is an `experiments.sh` file in `src/` that runs all the following experiments
-
+* F1 macro score is logged as it provides a score for both the model's precision and recall ability
 
 | Model | Dataset | Input Type | F1 Macro Score |
 |-------|---------|------------|----------------|
@@ -44,33 +63,15 @@
 | LSTM	| Snopes  |	Claim & Ev.|	  0.259     |
 | LSTM	| Snopes  |	Evidence   |	  0.266     |
 
-### Re-running the Experiment
-* `setup.sh` will also do the following
-* Clone the paper repository 
-```
-git clone https://github.com/casperhansen/fake-news-reasoning
-```
-
-* Download the dataset and place it in the same file as `code-acl`
-```
-cd fake-news-reasoning
-sudo wget https://www.dropbox.com/s/3v5oy3eddg3506j/multi_fc_publicdata.zip?dl=1
-```
-
-* Run `main.py`
-```
-cd fake-news-reasoning/code-acl/bias
-sudo pip3 install -r requirement.txt
-cp model_selection.py /usr/local/lib/python3.8/site-packages/hypopt
-sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes   
-```
-
-### Interpreting Results
+### Synthesizing Graphs & Interpreting Results
 * After running each configuration between `[lstm, bert, rf]` and `[snes, pomt]`, the following produces graphs in `results/`
 ```
 cd results
 ls && cd ..
 sudo python3 analyze.py
 ```
+* The results obtained in the above section align very well with the conclusions formed in the paper: evidence alone as an input type provides the model with better signals of fake news than models providing both claims and evidence
+* This hints towards the fact that the models are not learning to reason from claims and evidence but rather are learning specific evidence patterns
+* All evidence scores except for one outscored both the claim & evidence input types with the same models/datasets, the largest difference being the BERT model which learned much stronger signals from evidence alone
 
 ## Experiment II: Applying LSTM & Random Forrest models to other datasets
