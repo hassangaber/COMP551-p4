@@ -33,8 +33,8 @@
 | RF    | POTM    | Claim & Ev.|      0.306     |
 | RF	| POTM	  | Evidence   |      0.297     |	
 | RF    | POTM    | Claim      |      0.253     |
-| BERT  | Snopes  | Claim & Ev.|                |
-| BERT	| Snopes  |	Evidence   |                |
+| BERT  | POTM    | Claim & Ev.|      0.335     |
+| BERT	| POTM    |	Evidence   |      0.390     |
 | LSTM	| POTM	  |	Claim & Ev.|      0.258     |
 | LSTM	| POTM	  | Evidence   |      0.263     |
 | LSTM	| Snopes  |	Claim & Ev.|	  0.259     |
