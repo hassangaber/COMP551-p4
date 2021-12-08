@@ -6,18 +6,16 @@ import torch
 import numpy as np
 import pandas as pd
 from torch.utils.data import TensorDataset, DataLoader, Dataset
+import torchtext
 
 output = '../data/new.tsv'
 training_s = 0.7
 validation_s = 0.1
 testing_s = 0.2
 
-def train_valid_test(dataset):
-    split_index = math.floor(len(dataset),training_s)
-    train = dataset[split_index:]
-    test = dataset[:split_index]
-    return train, test
-
+def makeDF(path: str):
+    dataset = pd.read_csv(path, sep='\t', header=None,dtype='str')
+    return dataset
 
 """Convert CSV file to TSV file"""
 def makeTSV(path: str)->None:
@@ -28,51 +26,43 @@ def makeTSV(path: str)->None:
         for row in csvin:
             tsvout.writerow(row)
 
+"""Split data into training, validation, and test set"""
+def train_valid_test(dataset: pd.DataFrame):
+    temp = len(dataset)
+    split_index = math.floor(len(dataset)*training_s)
+    test = dataset[int(temp*0.8):]
+    valid = dataset[split_index:split_index+int(validation_s*temp)]
+    train = dataset[:split_index+int(0.1*temp)]
+    print(f'Dataset shapes (dataset, train, val, test): {dataset.shape}, {train.shape},   {valid.shape}, {test.shape}')
+    return train, valid, test
+
 """Extract claims, evidence, and labels as discrete lists with index matching"""
-def prepareData(path: str):
-    #df = pd.read_csv(path, sep='\t', header=None)
-    evidences, claims, labels = [], [], []
+def splitData(df: pd.DataFrame):
+    return df.iloc[:, 0], df.iloc[:, 1], df.iloc[:, 2]
 
-    with open(path, "r", encoding="utf8") as f:
-        lines = f.readlines()
-        for line_i, line in enumerate(lines):
-            content = line.split("\t")
-            text = content[0]
-            evidence = content[1]
-            label = content[2]
-            claims.append(text)
-            evidences.append(evidence)
-            labels.append(label)
-    
-    return claims, evidences, labels
-
-# Reference: https://stackoverflow.com/questions/44429199/how-to-load-a-list-of-numpy-arrays-to-pytorch-dataset-loader
 class MyDataset(Dataset):
-    def __init__(self, data, targets=None, transform=None, transform_target=None):
-        self.data = torch.from_numpy(data).float()
-        self.targets = torch.from_numpy(targets).float() if targets is not None else None
-        self.transform = transform
-        self.transform_target = transform_target
-        
-    def __getitem__(self, index):
-        x = self.data[index]
-        y = np.zeros(1, dtype=float)# self.targets[index]
+    def __init__(self, claim, data, labels):
+        self.claim = claim
+        self.data = data
+        self.labels = labels
 
-        if self.targets is not None:
-            y = self.targets[index]
-        else:
-            None
-        if self.transform:
-            x = self.transform(x)
-        if self.transform_target:
-            y = self.transform_target(y)
-        
-        return x, y
-    
-    
     def __len__(self):
-        return len(self.data)
+        return len(self.labels)
+
+    def __getitem__(self, index):
+        x = self.claim[index]
+        y = self.data[index]
+        z = self.labels[index]
+        w = {"Claim": x, "Evidence": y, "Label": z}
+        return w
+    
+def makeGenerator(v: pd.DataFrame):
+    a, b, c = splitData(v)
+    generator = torch.utils.data.DataLoader(MyDataset(a, b, c))
+    return generator
 
 if __name__=="__main__":
-    makeTSV('../data/dataset.csv')
-    prepareData(output)
+    t, v, t_ = train_valid_test(makeDF(output))
+    makeGenerator(t)
+    makeGenerator(v)
+    makeGenerator(t_)
