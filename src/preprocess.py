@@ -1,12 +1,8 @@
 import csv
-import pickle
-import os
 import math
 import torch
-import numpy as np
 import pandas as pd
-from torch.utils.data import TensorDataset, DataLoader, Dataset
-import torchtext
+from torch.utils.data import Dataset
 
 output = '../data/new.tsv'
 training_s = 0.7
