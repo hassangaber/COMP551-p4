@@ -2,8 +2,10 @@ import csv
 import math
 import torch
 import pandas as pd
+import numpy as np
 from torch.utils.data import Dataset
 
+input = '../data/dataset.csv'
 output = '../data/new.tsv'
 training_s = 0.7
 validation_s = 0.1
@@ -52,13 +54,36 @@ class MyDataset(Dataset):
         w = {"Claim": x, "Evidence": y, "Label": z}
         return w
     
+class singleData(Dataset):
+    def __init__(self, data):
+        self.data=data
+    def __len__(self):
+        return len(self.data)
+    def __getitem__(self, index):
+        x = self.data[index]
+        return x
+
 def makeGenerator(v: pd.DataFrame):
     a, b, c = splitData(v)
-    generator = torch.utils.data.DataLoader(MyDataset(a, b, c))
+    generator = torch.utils.data.DataLoader(MyDataset(a,b,c), batch_size=1)
+    
     return generator
 
-if __name__=="__main__":
+def makeSubscriptable(v: pd.DataFrame):
+    a, b, c = splitData(v)
+    subs1 = torch.utils.data.DataLoader(singleData(a), batch_size=1)
+    subs2 = torch.utils.data.DataLoader(singleData(b), batch_size=1)
+    subs3 = torch.utils.data.DataLoader(singleData(c), batch_size=1)
+    return subs1, subs2, subs3
+
+def __ExportDataset__():
+    makeTSV(input)
     t, v, t_ = train_valid_test(makeDF(output))
-    makeGenerator(t)
-    makeGenerator(v)
-    makeGenerator(t_)
+    _, _, o = splitData(t)
+    w = torch.tensor(np.array([0.5 for v in range(len(o))]))
+    print("New dataset successfully loaded! ... \n")
+    optim = makeSubscriptable(t)
+    return makeGenerator(t), makeGenerator(v), makeGenerator(t_), w, optim
+
+if __name__=='__main__':
+    __ExportDataset__()

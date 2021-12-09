@@ -1,10 +1,11 @@
-hassan@instance-1:~/fake-news-reasoning/code-acl/bias$ sudo python3 main.py --model lstm --dataset snes --inputtype EVIDENCE_ONLY --batchsize 16 --lr 0.0001 --lstm_hidden_dim 128 --lstm_layers 2 --lstm_dropout 0.1
-[Dec 05, 23:30:28] Namespace(batchsize=16, dataset='snes', eval_per_epoch=1, filter_websites=0, inputtype='EVIDENCE_ONLY', lr=0.0001, lstm_dropout=0.1, lstm_hidden_dim=128, lstm_layers=2, model='lstm')
-len 5069 , false (64.3\%), mostly false (7.5\%), mixture (12.3\%), mostly true (2.8\%), true (13.0\%)
-len 13581 , false (29.7\%), mostly false (17.0\%), mixture (19.8\%), mostly true (18.8\%), true (14.8\%)
+hassan@instance-1:~/fake-news-reasoning/code-acl/bias$ sudo vim main.py 
+hassan@instance-1:~/fake-news-reasoning/code-acl/bias$ sudo python3 main.py --model lstm --batchsize 1 --lstm_layers 2
+[Dec 09, 01:57:35] Namespace(batchsize=1, dataset='pomt', eval_per_epoch=1, filter_websites=0, inputtype='CLAIM_AND_EVIDENCE', lr=0.0001, lstm_dropout=0.1, lstm_hidden_dim=128, lstm_layers=2, model='lstm')
+model parameters 1679114
+Dataset shapes (dataset, train, val, test): (7005, 3), (5603, 3),   (700, 3), (1401, 3)
+New dataset successfully loaded! ... 
 glove.42B.300d.zip: 1.88GB [06:15, 5.00MB/s]                                                                                         
 100%|███████████████████████████████████████████████████████████████████████████████████| 1917494/1917494 [02:31<00:00, 12673.63it/s]
-model parameters 1674249
 [Dec 05, 23:40:32] TRAIN loss 1.6062460922980093 1
 [Dec 05, 23:40:32] VALIDATION F1micro, F1macro, loss: 0.5463510848126233 0.18823232323232325 507
 [Dec 05, 23:40:33] TEST F1micro, F1macro, loss: 0.5591715976331361 0.19018907092223677 1014
@@ -181,3 +182,5 @@ model parameters 1674249
 [Dec 05, 23:59:14] TRAIN loss 1.0617756204562143 33
 [Dec 05, 23:59:15] VALIDATION F1micro, F1macro, loss: 0.41420118343195267 0.25892559245383595 507
 [Dec 05, 23:59:15] PATIENCE 10 / 10
+
+
