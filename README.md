@@ -1,8 +1,10 @@
 # COMP551-p4
 
+- `data` new dataset to be used in experiment
 - `src` contains modified files from the paper repository and a script to automatically set up the enviroment
 - `runs` contains a script to run our experiments and output files of runs
 - `auto_fake_news_paper.pdf` is the paper to be reproduced
+- All experiments in this project were executed on a google instance VM with an NVIDIA Tesla T4 GPU, CUDA 11.1
 
 ## Introduction
 * Reproducibility in ML project based on an Automatic Fake News Detection paper exploring if models are learning to reason: https://arxiv.org/pdf/2105.07698v1.pdf
@@ -10,7 +12,8 @@
 
 * Main claim: Current models classifying fake news based on both claims and evidence proves inferior to models based only on evidence. This highlights the issue that models are not learning to reason but rather exploit signals in evidence (bias)
 
-* Goal of this project is to obtain results from the paper on our own and apply models to other language classification datasets with identical dataset formats
+* Goal of this project is to obtain results from the paper on our own and apply models to other language classification datasets with identical dataset formats:
+  * Observe how the metrics from the model with evidence only as input type consistently outpreform metrics from claim & evidence input types with constant computation times and model parameters
 
 ## Datasets
 
@@ -81,4 +84,38 @@ sudo python3 analyze.py
 * This hints towards the fact that the models are not learning to reason from claims and evidence but rather are learning specific evidence patterns
 * All evidence scores except for one outscored both the claim & evidence input types with the same models/datasets, the largest difference being the BERT model which learned much stronger signals from evidence alone
 
-## Experiment II: Applying LSTM & Random Forrest models to other datasets
+## Experiment II: Applying LSTM & Random Forrest models to new dataset
+
+### Preprocessing for LSTM & RF
+* The dataset was preprocessed to fit the format in the `Dataset` section above, all these operations are defined inside functions in `preprocess.py`
+* The function `__ExportDataset__()` returns all the desired forms of the dataset: in torch.dataloader form and in an subscriptable dataset form for training, validation, and testing data
+* Both the LSTM RNN and Random Forest only required the torch.dataloader generators for training, optimization, and metrics
+* To stay consistent with the paper, we converted the dataset to tsv form like the original dataset
+* To preprocess from scratch:
+```
+cd ~/fake-news-reasoning/code-acl
+sudo wget https://www.dropbox.com/sh/29de7na30yrtjbx/AADAIzCP09SIdttdbX8QbJVSa?dl=1
+unzip data.zip
+cd /bias && python3 preprocess.py
+```
+
+### Results
+
+#### Recall & Precision Metrics
+
+| Model | Dataset | Input Type | F1 Macro Score |
+|-------|---------|------------|----------------|
+| LSTM  | Valid	  | Claim & Evi|      0.288     |
+| LSTM  | Test	  | Claim & Evi|      0.252     |
+| LSTM  | Valid	  | Evidence   |      0.290     |
+| LSTM  | Test	  | Evidence   |      0.259     |
+| RF    | Valid	  | Claim & Evi|      0.228     |
+| RF    | Test	  | Claim & Evi|      0.213     |
+| RF    | Valid	  | Evidence   |      0.282     |
+| RF    | Test	  | Evidence   |      0.247     |
+
+#### Computation Times
+
+#### Model Parameters
+
+### Remarks

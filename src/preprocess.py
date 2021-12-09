@@ -1,3 +1,4 @@
+# Export new dataset in compatible form for LSTM and Random Forest models
 import csv
 import math
 import torch
@@ -11,11 +12,12 @@ training_s = 0.7
 validation_s = 0.1
 testing_s = 0.2
 
+# Make dataframe from tsv path
 def makeDF(path: str):
     dataset = pd.read_csv(path, sep='\t', header=None,dtype='str')
     return dataset
 
-"""Convert CSV file to TSV file"""
+# Convert CSV file to TSV file
 def makeTSV(path: str)->None:
     with open(path, 'r') as csvin, open(output, 'w') as tsvout:
         csvin = csv.reader(csvin)
@@ -24,7 +26,7 @@ def makeTSV(path: str)->None:
         for row in csvin:
             tsvout.writerow(row)
 
-"""Split data into training, validation, and test set"""
+# Split data into training, validation, and test set
 def train_valid_test(dataset: pd.DataFrame):
     temp = len(dataset)
     split_index = math.floor(len(dataset)*training_s)
@@ -34,26 +36,26 @@ def train_valid_test(dataset: pd.DataFrame):
     print(f'Dataset shapes (dataset, train, val, test): {dataset.shape}, {train.shape},   {valid.shape}, {test.shape}')
     return train, valid, test
 
-"""Extract claims, evidence, and labels as discrete lists with index matching"""
+# Extract claims, evidence, and labels as discrete lists with index matching
 def splitData(df: pd.DataFrame):
     return df.iloc[:, 0], df.iloc[:, 1], df.iloc[:, 2]
 
+# Process three-feature dataset
 class MyDataset(Dataset):
     def __init__(self, claim, data, labels):
         self.claim = claim
         self.data = data
         self.labels = labels
-
     def __len__(self):
         return len(self.labels)
-
     def __getitem__(self, index):
         x = self.claim[index]
         y = self.data[index]
         z = self.labels[index]
         w = {"Claim": x, "Evidence": y, "Label": z}
         return w
-    
+
+# Process single-feature dataset   
 class singleData(Dataset):
     def __init__(self, data):
         self.data=data
@@ -63,12 +65,13 @@ class singleData(Dataset):
         x = self.data[index]
         return x
 
+# Return Dataloader for dataframe
 def makeGenerator(v: pd.DataFrame):
     a, b, c = splitData(v)
-    generator = torch.utils.data.DataLoader(MyDataset(a,b,c), batch_size=1)
-    
+    generator = torch.utils.data.DataLoader(MyDataset(a,b,c), batch_size=1)    
     return generator
 
+# Create subscriptable dataset for optimizer operations
 def makeSubscriptable(v: pd.DataFrame):
     a, b, c = splitData(v)
     subs1 = torch.utils.data.DataLoader(singleData(a), batch_size=1)
@@ -76,6 +79,7 @@ def makeSubscriptable(v: pd.DataFrame):
     subs3 = torch.utils.data.DataLoader(singleData(c), batch_size=1)
     return subs1, subs2, subs3
 
+# Return all new instances of the new dataset
 def __ExportDataset__():
     makeTSV(input)
     t, v, t_ = train_valid_test(makeDF(output))
