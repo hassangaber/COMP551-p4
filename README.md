@@ -1,10 +1,11 @@
 # COMP551-p4
 
 - `data` new dataset to be used in experiment
-- `src` contains modified files from the paper repository and a script to automatically set up the enviroment
+- `src` contains modified files from the paper repository and scripts to automatically set up the enviroment
 - `runs` contains a script to run our experiments and output files of runs
 - `auto_fake_news_paper.pdf` is the paper to be reproduced
 - All experiments in this project were executed on a google instance VM with an NVIDIA Tesla T4 GPU, CUDA 11.1
+- RF refers to Random Forest Classification Model and LSTM refers to an RNN classifier
 
 ## Introduction
 * Reproducibility in ML project based on an Automatic Fake News Detection paper exploring if models are learning to reason: https://arxiv.org/pdf/2105.07698v1.pdf
@@ -53,6 +54,7 @@ sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes
 
 ### Results (F1 Macro Scores on Test Set)
 
+#### Recall & Precision Metrics on LSTM, Random Forest, & BERT-LSTM models
 * The following table shows the results obtained from our independent run based on the paper repository
 * The paper claims that models do not learn better from claims and evidence as they do with evidence only, therefore, we focus on the claims & evidence and evidence only F1 scores
 * There is an `experiments.sh` file in `src/` that runs all the following experiments
@@ -73,6 +75,20 @@ sudo python3 main.py --model lstm --lstm_layers 2 --lr 0.0001 --dataset snes
 | LSTM	| Snopes  |	Claim & Ev.|	  0.259     |
 | LSTM	| Snopes  |	Evidence   |	  0.266     |
 
+#### Computation Times
+* The computation time of the model training and evaluation was longer than reported on the paper due to our limited access to high preforming GPUs, in the paper they had access to an NVIDIA RTX
+* The computation time was proportional to the size of the dataset, the Snopes dataset took less time to run
+* Approximate computation times on NVIDIA Tesla T4 with CUDA 11.1:
+  
+| Model | Dataset | Time  | No. Parameters      |
+|-------|---------|-------|---------------------|
+| LSTM  | Snopes  | ~20m  | $1.01 \times 10^{6}$|
+| LSTM  | POTM    | ~25m  | $1.06 \times 10^{6}$|
+| RF    | Snopes  | ~2m   |			-			|
+| RF    | POTM    | ~5m   |			-			|
+| BERT  | Snopes  | ~7h30m| $110 \times 10^{6}$ |
+| BERT  | POTM    | ~8h00m| $110 \times 10^{6}$ |
+
 ### Synthesizing Graphs & Interpreting Results
 * After running each configuration between `[lstm, bert, rf]` and `[snes, pomt]`, the following produces graphs in `results/`
 ```
@@ -85,6 +101,7 @@ sudo python3 analyze.py
 * All evidence scores except for one outscored both the claim & evidence input types with the same models/datasets, the largest difference being the BERT model which learned much stronger signals from evidence alone
 
 ## Experiment II: Applying LSTM & Random Forrest models to new dataset
+* Note that experiments with the new dataset were not done on the BERT model because of the issues 
 
 ### Preprocessing for LSTM & RF
 * The dataset was preprocessed to fit the format in the `Dataset` section above, all these operations are defined inside functions in `preprocess.py`
@@ -100,6 +117,8 @@ cd /bias && python3 preprocess.py
 ```
 
 ### Results
+* Results obtained with the new dataset are consistent in terms of the recall and precision metrics, but different when it comes to computation times
+* An Interesting observation is that the computation times of the independent models are not linearally proportional to the size of the dataset but rather follow a $O(n\log n)$ scheme where $n$ is the number of instances in the dataset
 
 #### Recall & Precision Metrics
 
@@ -116,6 +135,13 @@ cd /bias && python3 preprocess.py
 
 #### Computation Times
 
-#### Model Parameters
+| Model | Dataset | Time  | No. Parameters      |
+|-------|---------|-------|---------------------|
+| LSTM  | Snopes  | ~30m  | $1.06 \times 10^{6}$|
+| LSTM  | POTM    | ~33m  | $1.06 \times 10^{6}$|
+| RF    | Snopes  | ~5m   |			-			|
+| RF    | POTM    | ~7m   |			-			|
 
 ### Remarks
+
+* Results synthesizes from the new dataset follow the observations made with the original dataset, proving that models do, in fact, exploit patterns strictly in evidence data rather than reason given both the claim and evidence
